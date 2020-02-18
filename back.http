@@ -1,0 +1,27 @@
+@api_key = f25bc7d86736ee8a81a79a844f3a5e61
+@authorization = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMjViYzdkODY3MzZlZThhODFhNzlhODQ0ZjNhNWU2MSIsInN1YiI6IjVlNDU2YzQ1M2RkMTI2MDAxNDVjMTU0NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wjLnjAoToFEjBib38iBIlctnVtZTE-ENmrDFcfNFcsI
+
+### popular movies
+GET https://api.themoviedb.org/3/movie/popular
+Authorization: Bearer {{authorization}}
+
+### images of movie
+GET https://api.themoviedb.org/3/movie/419704/images
+Authorization: Bearer {{authorization}}
+
+### configuration
+GET https://api.themoviedb.org/3/configuration
+Authorization: Bearer {{authorization}}
+
+### genres of movie
+GET https://api.themoviedb.org/3/genre/movie/list
+Authorization: Bearer {{authorization}}
+
+
+###
+GET https://api.themoviedb.org/3/configuration/languages
+Authorization: Bearer {{authorization}}
+
+### recommendations of movie
+GET https://api.themoviedb.org/3/movie/419704/recommendations
+Authorization: Bearer {{authorization}}
