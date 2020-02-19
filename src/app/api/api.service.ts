@@ -41,6 +41,6 @@ export class APIService {
           language: this._language,
           ...params,
         },
-      })
+      });
   }
 }
