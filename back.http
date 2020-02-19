@@ -25,3 +25,7 @@ Authorization: Bearer {{authorization}}
 ### recommendations of movie
 GET https://api.themoviedb.org/3/movie/419704/recommendations
 Authorization: Bearer {{authorization}}
+
+### details of movie
+GET https://api.themoviedb.org/3/movie/419704
+Authorization: Bearer {{authorization}}

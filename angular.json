@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "digit-gos"
+  "defaultProject": "digit-gos",
+  "cli": {
+    "analytics": false
+  }
 }

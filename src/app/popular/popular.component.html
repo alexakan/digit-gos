@@ -1,9 +1,7 @@
 
-  <!-- <h1>hello world</h1> -->
   <mat-form-field style="margin-left: auto; width: 300px">
     <mat-label>Поиск фильма по названию</mat-label>
     <input matInput type="search" (input)="changeInput($event)">
-    <!-- [(ngModel)]="searchQuery"  -->
   </mat-form-field>
   <ng-container *ngIf="movieList$ | async as movieList">
     <mat-card *ngFor="let movieItem of movieList.results" style="margin-bottom: 20px">
@@ -14,7 +12,7 @@
       </mat-card-header>
       <div style="display: flex;">
         <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
-          <img style="flex-grow: 0; margin: auto 10px" [attr.src]="imageBaseUrl + movieItem.poster_path" />
+          <img style="flex-grow: 0; margin: auto 10px; width: 200px;" [attr.src]="imageBaseUrl + movieItem.poster_path" />
         </ng-container>
         <mat-card-content style="flex-grow: 1;">
           <h3>Описание:</h3>

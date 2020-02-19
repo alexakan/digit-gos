@@ -11,7 +11,7 @@ import { map, debounceTime, mergeMap, distinctUntilChanged, tap, delay, throttle
 })
 export class PopularComponent implements OnInit {
   public genreList$ = this._appService.movieGenreList$;
-  public movieList$ = new Subject();
+  public movieList$ = new Subject<{[x: string]: any, results: any[]}>();
   public imageBaseUrl$ = this._appService.imageBaseUrl$;
   private _searchQuery$ = new BehaviorSubject<string>('');
   private _page$ = new Subject<number>();

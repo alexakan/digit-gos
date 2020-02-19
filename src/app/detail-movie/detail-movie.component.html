@@ -1,1 +1,21 @@
-<p>detail-movie works!</p>
+<mat-card *ngIf="movieEntity$ | async as movieEntity; else preloader">
+  <mat-card-header>
+    <mat-card-title>{{ movieEntity.title }}</mat-card-title>
+    <mat-card-subtitle>{{ movieEntity.tagline }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
+      <img [attr.src]="imageBaseUrl + movieEntity.poster_path" [attr.alt]="'Постер к фильму' + movieEntity.title" />
+    </ng-container>
+    <p>Дата релиза: {{ movieEntity.release_date }}</p>
+    <h3>Описание:</h3>
+    <p>{{ movieEntity.overview }}</p>
+    <p>Длительность: {{ movieEntity.runtime }} мин.</p>
+    <p>Официальный сайт фильма: <a [attr.href]="movieEntity.homepage" target="_blank" rel="noopener noreferrer">{{movieEntity.homepage}}</a></p>
+  </mat-card-content>
+</mat-card>
+<ng-template #preloader>
+  <div style="display: flex; width: 100%; justify-content: center;">
+    <mat-spinner [mode]="indeterminate"> </mat-spinner>
+  </div>
+</ng-template>
