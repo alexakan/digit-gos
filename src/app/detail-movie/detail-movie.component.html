@@ -1,55 +1,73 @@
-<mat-card *ngIf="movieEntity$ | async as movieEntity; else preloader">
+<mat-card
+  *ngIf="movieEntity$ | async as movieEntity; else preloader"
+  style="margin-bottom: 30px;"
+>
   <mat-card-header>
-    <mat-card-title>{{ movieEntity.title }}</mat-card-title>
+    <mat-card-title
+      ><h1>{{ movieEntity.title }}</h1></mat-card-title
+    >
     <mat-card-subtitle>{{ movieEntity.tagline }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content style="display: flex;">
     <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
       <img
         [attr.src]="imageBaseUrl + movieEntity.poster_path"
         [attr.alt]="'Постер к фильму' + movieEntity.title"
       />
     </ng-container>
-    <p>Дата релиза: {{ movieEntity.release_date }}</p>
-    <p><span class="bold-font">Описание: </span>{{ movieEntity.overview }}</p>
-    <p>
-      <span class="bold-font">Рейтинг IMDB: </span>{{ movieEntity.popularity }}
-    </p>
-    <p>
-      <span class="bold-font">Рейтинг: </span>{{ movieEntity.vote_average }}
-    </p>
-    <p><span class="bold-font">Голосов: </span>{{ movieEntity.vote_count }}</p>
-    <p><span class="bold-font">Бюджет: </span>{{ movieEntity.budget }}</p>
-    <p>
-      <span class="bold-font">Страна: </span
-      ><span
-        *ngFor="let country of movieEntity.production_countries"
-      >{{country.name}}; </span>
-    </p>
-    <ul style="padding-left: 0;">
-      <span class="bold-font">Жанр:</span>
-      <li
-        *ngFor="let genreItem of movieEntity.genres"
-        style="list-style: none; display: inline-block;"
-      >
-        {{ genreItem.name }};&nbsp;
-      </li>
-    </ul>
-    <p>
-      <span class="bold-font">Длительность: </span
-      >{{ movieEntity.runtime }} мин.
-    </p>
-    <p>
-      <span class="bold-font">Официальный сайт фильма: </span>
-      <a
-        [attr.href]="movieEntity.homepage"
-        target="_blank"
-        rel="noopener noreferrer"
-        >{{ movieEntity.homepage }}</a
-      >
-    </p>
+    <div style="margin-left: 20px;">
+      <p>
+        <span class="bold-font">Дата релиза: </span
+        >{{ movieEntity.release_date }}
+      </p>
+      <p><span class="bold-font">Описание: </span>{{ movieEntity.overview }}</p>
+      <p>
+        <span class="bold-font">Рейтинг IMDB: </span
+        >{{ movieEntity.popularity }}
+      </p>
+      <p>
+        <span class="bold-font">Рейтинг: </span>{{ movieEntity.vote_average }}
+      </p>
+      <p>
+        <span class="bold-font">Голосов: </span>{{ movieEntity.vote_count }}
+      </p>
+      <p><span class="bold-font">Бюджет: </span>{{ movieEntity.budget }}</p>
+      <p>
+        <span class="bold-font">Страна: </span
+        ><span *ngFor="let country of movieEntity.production_countries"
+          >{{ country.name }};
+        </span>
+      </p>
+      <ul style="padding-left: 0;">
+        <span class="bold-font">Жанр:</span>
+        <li
+          *ngFor="let genreItem of movieEntity.genres"
+          style="list-style: none; display: inline-block;"
+        >
+          {{ genreItem.name }};&nbsp;
+        </li>
+      </ul>
+      <p>
+        <span class="bold-font">Длительность: </span
+        >{{ movieEntity.runtime }} мин.
+      </p>
+      <p>
+        <span class="bold-font">Официальный сайт фильма: </span>
+        <a
+          [attr.href]="movieEntity.homepage"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ movieEntity.homepage }}</a
+        >
+      </p>
+    </div>
   </mat-card-content>
 </mat-card>
+<app-movie-list [movieList$]="movieRecommends$" (changePage)="changePageHandler($event)">
+  <h2>Рекомендованные фильмы:</h2>
+  <br />
+</app-movie-list>
+
 <ng-template #preloader>
   <div style="display: flex; width: 100%; justify-content: center;">
     <mat-spinner [mode]="indeterminate"> </mat-spinner>

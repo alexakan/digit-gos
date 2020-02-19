@@ -22,7 +22,7 @@ export class MovieApiService {
     return this._apiService.get(`movie/${movieId}`);
   }
 
-  public getRecommendationByMovie(movieId: number): Observable<any> {
-    return this._apiService.get(`movie/${movieId}/recommendations`);
+  public getRecommendationByMovie(movieId: number, page: number = 1): Observable<any> {
+    return this._apiService.get(`movie/${movieId}/recommendations`, {page});
   }
 }
