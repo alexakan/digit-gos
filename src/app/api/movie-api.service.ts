@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { APIService } from './api.service';
+import { PopularMovie } from './api.interface';
 
 @Injectable()
 export class MovieApiService {
   constructor(private _apiService: APIService) {}
 
-  public getPopularList(page = 1): Observable<any> {
+  public getPopularList(page = 1): Observable<PopularMovie> {
     return this._apiService.get('movie/popular', {page});
   }
 

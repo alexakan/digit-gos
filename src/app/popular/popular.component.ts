@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from '../api/movie-api.service';
 import { AppService } from '../app.service';
-import { Subject, BehaviorSubject, combineLatest, interval } from 'rxjs';
-import { map, debounceTime, mergeMap, distinctUntilChanged, tap, delay, throttle } from 'rxjs/operators';
+import { Subject, BehaviorSubject, combineLatest } from 'rxjs';
+import {
+  debounceTime,
+  mergeMap,
+  distinctUntilChanged,
+  tap
+} from 'rxjs/operators';
+import { PopularMovie } from '../api/api.interface';
 
 @Component({
   selector: 'app-popular',
@@ -12,15 +18,26 @@ import { map, debounceTime, mergeMap, distinctUntilChanged, tap, delay, throttle
 export class PopularComponent implements OnInit {
   public genreList$ = this._appService.movieGenreList$;
   public imageBaseUrl$ = this._appService.imageBaseUrl$;
-  public movieList$ = new Subject<{[x: string]: any, results: any[]}>();
+  public movieList$ = new Subject<
+    PopularMovie | { [x: string]: any; results: any[] }
+  >();
   private _searchQuery$ = new BehaviorSubject<string>('');
   private _page$ = new Subject<number>();
 
-  constructor(private _movieApiService: MovieApiService, private _appService: AppService) { }
+  constructor(
+    private _movieApiService: MovieApiService,
+    private _appService: AppService
+  ) {}
 
   ngOnInit(): void {
-    combineLatest([this._searchQuery$.pipe(debounceTime(500), distinctUntilChanged(), tap(() => this._page$.next(1))),
-      this._page$])
+    combineLatest([
+      this._searchQuery$.pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => this._page$.next(1))
+      ),
+      this._page$
+    ])
       .pipe(
         mergeMap(([query, page]) => {
           if (query) {
@@ -28,7 +45,8 @@ export class PopularComponent implements OnInit {
           }
           return this._movieApiService.getPopularList(page);
         })
-      ).subscribe(movieList => this.movieList$.next(movieList));
+      )
+      .subscribe(movieList => this.movieList$.next(movieList));
   }
 
   public pageEvent(event): void {
@@ -40,7 +58,7 @@ export class PopularComponent implements OnInit {
     this._page$.next(page);
   }
 
-  public changeInput({target: {value: query}}): void {
+  public changeInput({ target: { value: query } }): void {
     this._searchQuery$.next(query);
   }
 }
