@@ -1,41 +1,8 @@
-
-  <mat-form-field style="margin-left: auto; width: 300px">
-    <mat-label>Поиск фильма по названию</mat-label>
-    <input matInput type="search" (input)="changeInput($event)">
-  </mat-form-field>
-  <app-movie-list [movieList$]="movieList$" (changePage)="changePage($event)"></app-movie-list>
-  <!-- <ng-container *ngIf="movieList$ | async as movieList">
-    <mat-card *ngFor="let movieItem of movieList.results" style="margin-bottom: 20px">
-      <mat-card-header>
-        <mat-card-title>
-          <a [routerLink]="['/', 'movie', movieItem.id ]">{{movieItem.title}}</a></mat-card-title>
-        <mat-card-subtitle>Дата выхода: {{movieItem.release_date}}</mat-card-subtitle>
-      </mat-card-header>
-      <div style="display: flex;">
-        <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
-          <img style="flex-grow: 0; margin: auto 10px; width: 200px;" [attr.src]="imageBaseUrl + movieItem.poster_path" />
-        </ng-container>
-        <mat-card-content style="flex-grow: 1;">
-          <h3>Описание:</h3>
-          <p>{{movieItem.overview}}</p>
-          <h3>Ретийнг:</h3>
-          <p>{{movieItem.popularity}}</p>
-          <h3>Голосов:</h3>
-          <p>{{movieItem.vote_count}}</p>
-          <h3>Жанр:</h3>
-          <ul style="padding-left: 0;">
-            <li *ngFor="let id of movieItem.genre_ids" style="list-style: none; display: inline-block;">
-              {{(genreList$ | async)[id]}};&nbsp;</li>
-          </ul>
-        </mat-card-content>
-      </div>
-    </mat-card>
-    <mat-paginator
-      [length]="movieList.total_results"
-      hidePageSize=true
-      [pageSize]="20"
-      [pageIndex]="movieList.page - 1"
-      (page)=pageEvent($event)
-      >
-  </mat-paginator>
-  </ng-container> -->
+<mat-form-field class="popular-search">
+  <mat-label>Поиск фильма по названию</mat-label>
+  <input matInput type="search" (input)="changeInput($event)" />
+</mat-form-field>
+<app-movie-list
+  [movieList$]="movieList$"
+  (changePage)="changePage($event)"
+></app-movie-list>

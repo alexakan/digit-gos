@@ -1,0 +1,13 @@
+.movie-content-wrapper__content {
+  flex-grow: 1;
+}
+
+.movie-content-wrapper {
+  display: flex;
+}
+
+.movie-content-wrapper__image {
+  flex-grow: 0;
+  margin: auto 10px;
+  width: 200px;
+}

@@ -1,5 +1,5 @@
-<ng-container *ngIf="movieList$ | async as movieList">
-<ng-content></ng-content>
+<ng-container *ngIf="movieList$ | async as movieList; else preloader">
+  <ng-content></ng-content>
   <mat-card
     *ngFor="let movieItem of movieList.results"
     style="margin-bottom: 20px"
@@ -14,15 +14,15 @@
         >Дата выхода: {{ movieItem.release_date }}</mat-card-subtitle
       >
     </mat-card-header>
-    <div style="display: flex;">
+    <div class="movie-content-wrapper">
       <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
         <img
-          style="flex-grow: 0; margin: auto 10px; width: 200px;"
+          class="movie-content-wrapper__image"
           [attr.alt]="'Постер к фильму' + movieItem.title"
           [attr.src]="imageBaseUrl + movieItem.poster_path"
         />
       </ng-container>
-      <mat-card-content style="flex-grow: 1;">
+      <mat-card-content class="movie-content-wrapper__content">
         <p><span class="bold-font">Описание: </span>{{ movieItem.overview }}</p>
         <p>
           <span class="bold-font">Рейтинг: </span>{{ movieItem.vote_average }}
@@ -51,3 +51,8 @@
   >
   </mat-paginator>
 </ng-container>
+<ng-template #preloader>
+  <div style="display: flex; width: 100%; justify-content: center;">
+    <mat-spinner [mode]="'indeterminate'"> </mat-spinner>
+  </div>
+</ng-template>
