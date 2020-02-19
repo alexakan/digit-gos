@@ -11,7 +11,7 @@ export class AppService {
   }>(null);
   readonly movieGenreList$ = this._movieGenreListSubject
     .asObservable()
-    .pipe(filter(res => res !== null));
+    .pipe(filter(res => res !== null), tap(res => console.log(res)));
   private _imageBaseUrlSubject = new BehaviorSubject<string>(null);
   readonly imageBaseUrl$ = this._imageBaseUrlSubject
     .asObservable()

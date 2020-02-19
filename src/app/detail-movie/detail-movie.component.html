@@ -5,13 +5,49 @@
   </mat-card-header>
   <mat-card-content>
     <ng-container *ngIf="imageBaseUrl$ | async as imageBaseUrl">
-      <img [attr.src]="imageBaseUrl + movieEntity.poster_path" [attr.alt]="'Постер к фильму' + movieEntity.title" />
+      <img
+        [attr.src]="imageBaseUrl + movieEntity.poster_path"
+        [attr.alt]="'Постер к фильму' + movieEntity.title"
+      />
     </ng-container>
     <p>Дата релиза: {{ movieEntity.release_date }}</p>
-    <h3>Описание:</h3>
-    <p>{{ movieEntity.overview }}</p>
-    <p>Длительность: {{ movieEntity.runtime }} мин.</p>
-    <p>Официальный сайт фильма: <a [attr.href]="movieEntity.homepage" target="_blank" rel="noopener noreferrer">{{movieEntity.homepage}}</a></p>
+    <p><span class="bold-font">Описание: </span>{{ movieEntity.overview }}</p>
+    <p>
+      <span class="bold-font">Рейтинг IMDB: </span>{{ movieEntity.popularity }}
+    </p>
+    <p>
+      <span class="bold-font">Рейтинг: </span>{{ movieEntity.vote_average }}
+    </p>
+    <p><span class="bold-font">Голосов: </span>{{ movieEntity.vote_count }}</p>
+    <p><span class="bold-font">Бюджет: </span>{{ movieEntity.budget }}</p>
+    <p>
+      <span class="bold-font">Страна: </span
+      ><span
+        *ngFor="let country of movieEntity.production_countries"
+      >{{country.name}}; </span>
+    </p>
+    <ul style="padding-left: 0;">
+      <span class="bold-font">Жанр:</span>
+      <li
+        *ngFor="let genreItem of movieEntity.genres"
+        style="list-style: none; display: inline-block;"
+      >
+        {{ genreItem.name }};&nbsp;
+      </li>
+    </ul>
+    <p>
+      <span class="bold-font">Длительность: </span
+      >{{ movieEntity.runtime }} мин.
+    </p>
+    <p>
+      <span class="bold-font">Официальный сайт фильма: </span>
+      <a
+        [attr.href]="movieEntity.homepage"
+        target="_blank"
+        rel="noopener noreferrer"
+        >{{ movieEntity.homepage }}</a
+      >
+    </p>
   </mat-card-content>
 </mat-card>
 <ng-template #preloader>

@@ -11,8 +11,8 @@ import { map, debounceTime, mergeMap, distinctUntilChanged, tap, delay, throttle
 })
 export class PopularComponent implements OnInit {
   public genreList$ = this._appService.movieGenreList$;
-  public movieList$ = new Subject<{[x: string]: any, results: any[]}>();
   public imageBaseUrl$ = this._appService.imageBaseUrl$;
+  public movieList$ = new Subject<{[x: string]: any, results: any[]}>();
   private _searchQuery$ = new BehaviorSubject<string>('');
   private _page$ = new Subject<number>();
 
@@ -34,6 +34,10 @@ export class PopularComponent implements OnInit {
   public pageEvent(event): void {
     const pageIndex = event.pageIndex;
     this._page$.next(pageIndex + 1);
+  }
+
+  public changePage(page: number): void {
+    this._page$.next(page);
   }
 
   public changeInput({target: {value: query}}): void {

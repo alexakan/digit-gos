@@ -23,6 +23,7 @@ export class DetailMovieComponent implements OnInit {
     )
   );
   public imageBaseUrl$ = this._appService.imageBaseUrl$;
+  public genreList$ = this._appService.movieGenreList$;
   public indeterminate: ProgressSpinnerMode = 'indeterminate';
 
   constructor(

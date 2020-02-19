@@ -15,12 +15,13 @@ import { APIModule } from "./api/api.module";
 import { PopularComponent } from "./popular/popular.component";
 import { FormsModule } from "@angular/forms";
 import { DetailMovieComponent } from "./detail-movie/detail-movie.component";
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 const ACCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMjViYzdkODY3MzZlZThhODFhNzlhODQ0ZjNhNWU2MSIsInN1YiI6IjVlNDU2YzQ1M2RkMTI2MDAxNDVjMTU0NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wjLnjAoToFEjBib38iBIlctnVtZTE-ENmrDFcfNFcsI";
 
 @NgModule({
-  declarations: [AppComponent, PopularComponent, DetailMovieComponent],
+  declarations: [AppComponent, PopularComponent, DetailMovieComponent, MovieListComponent],
   imports: [
     BrowserModule,
     FormsModule,

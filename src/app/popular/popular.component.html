@@ -3,7 +3,8 @@
     <mat-label>Поиск фильма по названию</mat-label>
     <input matInput type="search" (input)="changeInput($event)">
   </mat-form-field>
-  <ng-container *ngIf="movieList$ | async as movieList">
+  <app-movie-list [movieList$]="movieList$" (changePage)="changePage($event)"></app-movie-list>
+  <!-- <ng-container *ngIf="movieList$ | async as movieList">
     <mat-card *ngFor="let movieItem of movieList.results" style="margin-bottom: 20px">
       <mat-card-header>
         <mat-card-title>
@@ -37,4 +38,4 @@
       (page)=pageEvent($event)
       >
   </mat-paginator>
-  </ng-container>
+  </ng-container> -->
